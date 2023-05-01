@@ -13,27 +13,29 @@ public class PersonControl {
 
         @Autowired
         private PersonService personService;
-        @PostMapping
+        
+        
+        @PostMapping("/add")
         public ResponseEntity<?> addPerson(@RequestBody Person person){
             return ResponseEntity.ok(personService.addPerson(person));
         }
 
-        @PutMapping
+        @PutMapping("/update")
         public ResponseEntity<?> updatePerson(@RequestBody Person person){
             return ResponseEntity.ok(personService.update(person));
         }
 
-        @GetMapping
+        @GetMapping("/getAll")
         public ResponseEntity<?> getAll(){
             return ResponseEntity.ok(personService.findAll());
         }
 
         @GetMapping("/{id}")
-        public ResponseEntity<?> getPersonById(@PathVariable Long id) {
+        public ResponseEntity<?> getPersonById(@PathVariable String id) {
             return ResponseEntity.ok(personService.findById(id));
         }
-        @DeleteMapping
-        public void deletePerson(Long id){
+        @DeleteMapping("/{id}")
+        public void deletePerson(@PathVariable String id){
             personService.delete(id);
         }
 }

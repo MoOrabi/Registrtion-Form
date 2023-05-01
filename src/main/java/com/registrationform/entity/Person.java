@@ -1,11 +1,9 @@
 package com.registrationform.entity;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-import org.springframework.format.annotation.NumberFormat;
 
 
 @Getter
@@ -17,17 +15,19 @@ import org.springframework.format.annotation.NumberFormat;
 public class Person {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String firstName;
-    private String lastName;
-    @Column(unique = true)
-    @Size(max = 4)
-    private String zipcode;
+    @Size(min = 14, max = 14)
+    private String id;
     @NotNull
-    private String imag;
+    private String firstName;
+    @NotNull
+    private String lastName;
+    
+    @NotNull
+    private String image;
+    @NotNull
     private int level;
 
+    @NotNull
     private String theNameOfDar;
 
 
