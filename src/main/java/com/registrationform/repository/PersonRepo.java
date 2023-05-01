@@ -7,9 +7,8 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface PersonRepo extends JpaRepository<Person,Long> {
+public interface PersonRepo extends JpaRepository<Person,String> {
 
 
-    Optional<Person> findByZipcode(String zip);
 
 }
