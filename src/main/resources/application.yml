@@ -1,0 +1,13 @@
+server:
+  servlet:
+    context-path: /api
+  port: 8083
+
+
+# swagger-ui custom path
+springdoc:
+  swagger-ui:
+    path: /api-doc
+
+
+
