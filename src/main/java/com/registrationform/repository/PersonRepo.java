@@ -1,13 +1,11 @@
 package com.registrationform.repository;
 
-import com.registrationform.entity.Person;
+import com.registrationform.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Repository
-public interface PersonRepo extends JpaRepository<Person,String> {
+public interface PersonRepo extends JpaRepository<User,Long> {
 
 
 

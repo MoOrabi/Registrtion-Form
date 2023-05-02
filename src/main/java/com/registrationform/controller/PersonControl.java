@@ -1,41 +1,53 @@
 package com.registrationform.controller;
 
-import com.registrationform.entity.Person;
+import com.registrationform.entity.User;
 import com.registrationform.services.PersonService;
+import com.registrationform.utils.ArabicUtils;
+import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
+@AllArgsConstructor
 @RequestMapping("/person")
 public class PersonControl {
 
-        @Autowired
-        private PersonService personService;
-        
-        
-        @PostMapping("/add")
-        public ResponseEntity<?> addPerson(@RequestBody Person person){
-            return ResponseEntity.ok(personService.addPerson(person));
-        }
+    @Autowired
+    private PersonService personService;
 
-        @PutMapping("/update")
-        public ResponseEntity<?> updatePerson(@RequestBody Person person){
-            return ResponseEntity.ok(personService.update(person));
-        }
+    @PostMapping
+    public ResponseEntity<?> saveUser(@Valid @RequestBody User user) {
+        // Remove diacritics from first name, last name, and dar name
+        user.setFirstName(ArabicUtils.removeDiacritics(user.getFirstName()));
+        user.setLastName(ArabicUtils.removeDiacritics(user.getLastName()));
+        user.setDarName(ArabicUtils.removeDiacritics(user.getDarName()));
 
-        @GetMapping("/getAll")
-        public ResponseEntity<?> getAll(){
-            return ResponseEntity.ok(personService.findAll());
-        }
+        User savedUser = personService.save(user);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
-        @GetMapping("/{id}")
-        public ResponseEntity<?> getPersonById(@PathVariable String id) {
-            return ResponseEntity.ok(personService.findById(id));
-        }
-        @DeleteMapping("/{id}")
-        public void deletePerson(@PathVariable String id){
-            personService.delete(id);
-        }
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+        User user = personService.getUserById(id);
+        return ResponseEntity.ok(user);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable Long id) {
+         personService.deleteUser(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping
+    public List<User> getAllUsers() {
+        return personService.getAllUsers();
+    }
 }
