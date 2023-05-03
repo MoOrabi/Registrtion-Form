@@ -1,7 +1,8 @@
 package com.registrationform.controller;
 
 import com.registrationform.entity.Person;
-import com.registrationform.services.PersonService;
+import com.registrationform.service.PersonService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/person")
-public class PersonControl {
+public class PersonController {
 
         @Autowired
         private PersonService personService;
