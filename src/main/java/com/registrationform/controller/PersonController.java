@@ -1,7 +1,7 @@
 package com.registrationform.controller;
 
 import com.registrationform.entity.User;
-import com.registrationform.services.PersonService;
+import com.registrationform.service.PersonService;
 import com.registrationform.utils.ArabicUtils;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/person")
-public class PersonControl {
+public class PersonController {
 
     @Autowired
     private PersonService personService;
@@ -30,7 +30,7 @@ public class PersonControl {
         user.setLastName(ArabicUtils.removeDiacritics(user.getLastName()));
         user.setDarName(ArabicUtils.removeDiacritics(user.getDarName()));
 
-        User savedUser = personService.save(user);
+        User savedUser = personService.addPerson(user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

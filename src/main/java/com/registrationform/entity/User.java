@@ -53,6 +53,25 @@ public class User {
     @NotNull(message = "Registration date is mandatory")
     private LocalDate registrationDate;
 
+	public User(@NotBlank(message = "{NotNull.user.firstName}") String firstName,
+			@NotBlank(message = "{NotBlank.user.lastName}") String lastName,
+			@NotNull(message = "{Range.user.age}") @Min(value = 5, message = "{Range.user.age}") @Max(value = 20, message = "{Range.user.age}") Integer age,
+			@NotNull(message = "{Range.user.level}") @Min(value = 1, message = "{Range.user.level}") @Max(value = 8, message = "{Range.user.level}") Integer level,
+			@NotBlank(message = "{Size.user.nationalId}") @Size(min = 14, max = 14, message = "Size.user.nationalId}") String nationalId,
+			byte[] image, @NotBlank(message = "{NotBlank.user.darName}") String darName,
+			@NotBlank(message = "{Size.user.phone}") @Size(min = 11, max = 11, message = "{Size.user.phone}") String phone) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.age = age;
+		this.level = level;
+		this.nationalId = nationalId;
+		this.image = image;
+		this.darName = darName;
+		this.phone = phone;
+		this.registrationDate=LocalDate.now();
+	}
 
+
+    
 
 }
