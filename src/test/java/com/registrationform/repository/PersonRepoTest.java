@@ -1,7 +1,7 @@
 package com.registrationform.repository;
 
 //@DataJpaTest
-public class PersonRepositoryTest {
+public class PersonRepoTest {
 
 	
 //	@Autowired

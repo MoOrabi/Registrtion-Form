@@ -15,6 +15,7 @@ import static org.mockito.BDDMockito.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.registrationform.entity.Person;
+import com.registrationform.entity.User;
 import com.registrationform.exception.BadRequest;
 import com.registrationform.repository.PersonRepository;
 
@@ -61,4 +62,22 @@ public class PersonServiceTest {
 		
 		verify(personRepository).findAll();
 	}
+	
+	 public User addPerson(User person){
+	        checkPersonIsValid(person);
+	        
+	        if(personRepository.existsById(person.getId())) {
+	        	throw new BadRequest("Duplicate Applicant. This Applicant is already added");
+	        }
+	        return personRepository.save(person);
+	    }
+
+		private void checkPersonIsValid(User person) {
+			if (person.getId().length()>14||person.getId().length()<14)
+	                throw new BadRequest("Wrong Id");
+	        if (person.getFirstName()==null||person.getLastName()==null||
+	        		person.getLevel()==0||person.getImage()==null||
+	        		person.getTheNameOfDar()==null)
+	            throw new BadRequest("Enter All required data");
+		}
 }
