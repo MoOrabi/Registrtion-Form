@@ -18,6 +18,7 @@ import com.registrationform.entity.Person;
 import com.registrationform.entity.User;
 import com.registrationform.exception.BadRequest;
 import com.registrationform.repository.PersonRepository;
+import com.registrationform.services.PersonService;
 
 @ExtendWith(MockitoExtension.class)
 public class PersonServiceTest {
